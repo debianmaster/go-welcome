@@ -1,0 +1,27 @@
+kind: pipeline
+name: default
+
+steps:
+- name: build
+  image: golang
+  commands:
+  - go build
+  - go test
+
+- name: publish
+  image: plugins/docker
+  settings:
+    registry: registry.heroku.com
+    repo: registry.heroku.com/my-staging-app/web
+  when:
+    event: [ promote ]
+    target: [ staging ]
+
+- name: publish_to_prod
+  image: plugins/docker
+  settings:
+    registry: registry.heroku.com
+    repo: registry.heroku.com/my-production-app/web
+  when:
+    event: [ promote ]
+    target: [ production ]
