@@ -5,6 +5,7 @@ steps:
 - name: build
   image: golang
   commands:
+  - go get github.com/gin-gonic/gin
   - go build
   - go test
 
