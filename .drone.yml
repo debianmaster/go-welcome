@@ -7,8 +7,8 @@ steps:
   commands:
   - go get github.com/gin-gonic/gin
   - go get github.com/go-sql-driver/mysql
-  - go build
-  - go test
+  - go build -o main . 
+
 
 - name: publish
   image: plugins/docker
