@@ -2,19 +2,12 @@ kind: pipeline
 name: default
 
 steps:
-- name: build
-  image: golang
-  commands:
-  - go get github.com/gin-gonic/gin
-  - go get github.com/go-sql-driver/mysql
-  - go build -o main . 
-
 
 - name: publish
   image: plugins/docker
   settings:
-    registry: registry.heroku.com
-    repo: registry.heroku.com/my-staging-app/web
+    registry: docker.io
+    repo: debianmaster/go-welcome1
   when:
     event: [ promote ]
     target: [ staging ]
