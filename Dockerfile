@@ -1,8 +1,15 @@
 
-FROM golang:1.18-buster
+FROM golang:1.17-buster
+
 WORKDIR /app
-COPY go.mod go.sum .
+
+COPY go.mod ./
+COPY go.sum ./
+
 RUN go mod download
-COPY main.go .
+
+COPY . ./
+
 RUN go build -o main
+
 CMD ["./main"]

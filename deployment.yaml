@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: go-welcome
-        image: debianmaster/go-welcome:latest
+        image: ghcr.io/debianmaster/go-welcome:latest
         ports:
         - containerPort: 8080
