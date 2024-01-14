@@ -1,0 +1,23 @@
+
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build -t debianmaster/go-welcome .
+      - name: Push Docker image to Docker Hub
+        run: docker push debianmaster/go-welcome
+      - name: Deploy to Kubernetes
+        uses: GoogleCloudPlatform/kpt-run@v1.7
+        with:
+          args: apply -f deployment.yaml
+          secret_name: kpt-secret
+

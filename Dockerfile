@@ -1,8 +1,8 @@
-FROM golang:latest 
-RUN mkdir /app 
-RUN go get github.com/gin-gonic/gin && go get github.com/go-sql-driver/mysql 
-ADD . /app/
+
+FROM golang:1.18-buster
 WORKDIR /app
-RUN go build -o main . 
-EXPOSE 8000
-CMD ["/app/main"]
+COPY go.mod go.sum .
+RUN go mod download
+COPY main.go .
+RUN go build -o main
+CMD ["./main"]
